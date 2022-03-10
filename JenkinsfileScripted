@@ -3,15 +3,9 @@ node('built-in') {
   stage('clone from repository') {
     checkout scm
   }
-  stage('use maven') {
-    tool name: 'mvn3.8.4', type: 'maven'
-  }
-  
-  stage('show env vars') {
-    sh "echo ${env.WORKSPACE}"
-  }
   
   stage('Build stage') {
+        tool name: 'mvn3.8.4', type: 'maven'
         sh 'echo Building ${BRANCH} branch'
         sh 'mvn clean install -DskipTests'
   }
