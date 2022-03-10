@@ -1,6 +1,6 @@
 pipeline {
     parameters {
-      string defaultValue: 'main', description: 'The branch to checkout (default: main)', name: 'BRANCH'
+      string defaultValue: 'master', description: 'The branch to checkout (default: master)', name: 'BRANCH'
     }
 
     agent any
