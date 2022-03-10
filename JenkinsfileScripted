@@ -1,4 +1,4 @@
-node('built-in') {
+node {
   stage('clone from repository') {
     checkout scm
   }
