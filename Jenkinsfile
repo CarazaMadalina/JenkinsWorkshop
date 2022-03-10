@@ -12,8 +12,7 @@ pipeline {
     stages {
       stage('Build stage') {
         steps {
-	    echo 'hello world'
-            echo 'Building ${BRANCH} branch'
+            sh 'echo Building ${BRANCH} branch'
             sh 'mvn clean install'
         }
       }
