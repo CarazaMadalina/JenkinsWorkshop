@@ -6,19 +6,17 @@ node('built-in') {
   
   stage('Build stage') {
         tool name: 'mvn3.8.4', type: 'maven'
-        sh 'echo Building ${BRANCH} branch'
         sh 'mvn clean install -DskipTests'
   }
   
   stage('Test stage') {
-     when {
-        branch 'master'
+     if (branch == 'master') {
+       sh 'mvn test'
      }
-     sh 'mvn test'
   }
   
   stage('Clean Workspace') {
-        cleanWs deleteDirs: true
+      cleanWs()
   }
   
 }
