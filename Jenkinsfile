@@ -13,7 +13,7 @@ pipeline {
       stage('Build stage') {
         steps {
             sh 'echo Building ${BRANCH} branch'
-            sh 'mvn clean install'
+            sh 'mvn clean install -DskipTests'
         }
       }
 
