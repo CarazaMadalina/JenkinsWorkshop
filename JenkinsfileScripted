@@ -8,26 +8,19 @@ node('built-in') {
   }
   
   stage('Build stage') {
-    steps {
         sh 'echo Building ${BRANCH} branch'
         sh 'mvn clean install -DskipTests'
-    }
   }
   
   stage('Test stage') {
      when {
-        expression { BRANCH == "master" }
+        branch 'master'
      }
-
-     steps {
-      sh 'mvn test'
-     }
+     sh 'mvn test'
   }
   
   stage('Clean Workspace') {
-      steps {
-        cleanWs()
-      }
+        cleanWs deleteDirs: true
   }
   
 }
