@@ -5,15 +5,15 @@ node('built-in') {
   }
   
   stage('Build stage') {
-        withMaven {
+        withMaven(maven: 'mvn3.8.4') {
           sh 'mvn clean install -DskipTests'
         }
   }
   
   stage('Test stage') {
      if (env.BRANCH_NAME == 'master') {
-       withMaven {
-        sh 'mvn test'
+       withMaven(maven: 'mvn3.8.4') {
+         sh 'mvn test'
        }
      }
   }
