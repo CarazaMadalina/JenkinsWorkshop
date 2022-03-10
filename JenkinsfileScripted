@@ -18,9 +18,6 @@ node('built-in') {
      when {
         expression { BRANCH == "master" }
      }
-     agent {
-        label 'built-in'
-     }
 
      steps {
       sh 'mvn test'
