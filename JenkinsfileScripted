@@ -5,13 +5,16 @@ node('built-in') {
   }
   
   stage('Build stage') {
-        tool name: 'mvn3.8.4', type: 'maven'
-        sh 'mvn clean install -DskipTests'
+        withMaven {
+          sh 'mvn clean install -DskipTests'
+        }
   }
   
   stage('Test stage') {
-     if (branch == 'master') {
-       sh 'mvn test'
+     if (env.BRANCH_NAME == 'master') {
+       withMaven {
+        sh 'mvn test'
+       }
      }
   }
   
