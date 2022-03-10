@@ -1,0 +1,36 @@
+node('built-in') {
+  stage('clone from repository') {
+    checkout scm
+  }
+  
+  stage('show env vars') {
+    sh "echo ${env.WORKSPACE}"
+  }
+  
+  stage('Build stage') {
+    steps {
+        sh 'echo Building ${BRANCH} branch'
+        sh 'mvn clean install -DskipTests'
+    }
+  }
+  
+  stage('Test stage') {
+     when {
+        expression { BRANCH == "master" }
+     }
+     agent {
+        label 'built-in'
+     }
+
+     steps {
+      sh 'mvn test'
+     }
+  }
+  
+  stage('Clean Workspace') {
+      steps {
+        cleanWs deleteDirs: true
+      }
+  }
+  
+}
